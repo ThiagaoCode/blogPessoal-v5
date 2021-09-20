@@ -1,5 +1,6 @@
 package org.generation.blogPessoal.model;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,25 +29,35 @@ public class UsuarioTeste {
 	
 	@BeforeEach
 	public void start() {
-	LocalDate data = LocalDate.parse("1995-01-21",
-	DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	usuario = new Usuario(0L, "Thiago Pedroso",
-	"thiagao", "13465278", data);
+	LocalDate data = LocalDate.parse("1995-01-21", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	usuario = new Usuario(0L, "Thiago Pedroso", "thiagao", "13465278", data);
 	} 
 	
 	@Test
 	@DisplayName("✔ Valida Atributos Não Nulos")
 	void testValidaAtributos() {
+		
 	Set<ConstraintViolation<Usuario>> violacao = validator.validate(usuario);
+	
 	System.out.println(violacao.toString());
+	
 	assertTrue(violacao.isEmpty());
-	} @
-	Test
+	} 
+	
+	
+	@Test
 	@DisplayName("✖ Não Valida Atributos Nulos")
 	void testNaoValidaAtributos() {
+		
 	Set<ConstraintViolation<Usuario>> violacao = validator.validate(usuarioNulo);
+	
 	System.out.println(violacao.toString());
-	assertTrue(violacao.isEmpty());
+	
+	assertFalse(violacao.isEmpty());
+	
 	}
+	
+	
 	}
+
 

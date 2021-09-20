@@ -47,18 +47,17 @@ public class Usuario {
 	private List<Postagem> minhasPostagens = new ArrayList<>();
 
 	
-	public Usuario() {
-		super();
-	}
+	
 
 	public Usuario(Long id, String nome, String usuario, String senha, LocalDate dataNascimento) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.usuario = usuario;
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
 	}
+	
+	public Usuario() { 	} //contrutor vazio necessario
 
 	public Long getId() {
 		return id;

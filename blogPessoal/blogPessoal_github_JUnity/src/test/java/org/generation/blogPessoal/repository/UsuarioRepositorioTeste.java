@@ -1,4 +1,4 @@
-/* package org.generation.blogPessoal.repository;
+package org.generation.blogPessoal.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,52 +19,50 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public interface UsuarioRepositorioTeste {
+public class UsuarioRepositorioTeste {
 
 	@Autowired
-	private UsuarioRepository usuarioRep;
+	private UsuarioRepository usuarioRepository;
 
 	@BeforeAll
-	void start(){
-		
-	LocalDate data = LocalDate.parse("2000-07-22",
-	DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	
-	Usuario usuario = new Usuario();
-	if(!usuarioRepository.findByUsuarioContainingIgnoreCase(usuario.getUsuario()).isPresent())
-	usuarioRep.save(usuario);
-	usuario = new Usuario();
-	if(!usuarioRep.findByUsuarioContainingIgnoreCase(usuario.getUsuario()).isPresent())
-	usuarioRep.save(usuario);
-	usuario = new Usuario(0, "Frederico da Silva",
-	"frederico@email.com.br", "13465278", data);
-	if(!usuarioRepository.findByUsuarioContainingIgnoreCase(usuario.getUsuario()).isPresent())
-	usuarioRepository.save(usuario);
-	usuario = new Usuario(0, "Paulo Antunes",
-	"paulo@email.com.br", "13465278", data);
-	if(!usuarioRepository.findByUsuarioContainingIgnoreCase(usuario.getUsuario()).isPresent())
-	usuarioRepository.save(usuario);
+	void start() {
+		LocalDate data = LocalDate.parse("2000-07-22", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+		Usuario usuario = new Usuario(0L, "Frederico da Silva", "frederico@email.com.br", "13465278", data);
+		if (!usuarioRepository.findByUsuarioContainingIgnoreCase(usuario.getUsuario()).isPresent())
+			usuarioRepository.save(usuario);
+
+		usuario = new Usuario(0L, "Paulo Antunes", "paulo@email.com.br", "13465278", data);
+		if (!usuarioRepository.findByUsuarioContainingIgnoreCase(usuario.getUsuario()).isPresent())
+			usuarioRepository.save(usuario);
+
+		usuario = new Usuario(0L, "Gabriela Silva", "gabis@email.com.br", "13465278", data);
+		if (!usuarioRepository.findByUsuarioContainingIgnoreCase(usuario.getUsuario()).isPresent())
+			usuarioRepository.save(usuario);
+
+		usuario = new Usuario(0L, "Tamaia Sanrs", "tama@email.com.br", "13465278", data);
+		if (!usuarioRepository.findByUsuarioContainingIgnoreCase(usuario.getUsuario()).isPresent())
+			usuarioRepository.save(usuario);
+
 	}
 
 	@Test
 	@DisplayName("💾 Retorna o nome")
-	public void findByNomeRetornaNome(){
-	Usuario usuario = usuarioRepository.findByNomeContainingIgnoreCase("João da Silva");
-	assertTrue(usuario.getNome().equals("João da Silva"));
+	public void findByNomeRetornaNome() {
+		Usuario usuario = usuarioRepository.findByNome("Paulo Antunes");
+		assertTrue(usuario.getNome().equals("Paulo Antunes"));
 	}
 
 	@Test
-	@DisplayName("💾 Retorna 3 usuarios")
-	public void findAllByNomeContainingIgnoreCaseRetornaTresUsuarios() {
-	List<Usuario> listaDeUsuarios = usuarioRepository
-	.findAllByNomeContainingIgnoreCase("Silva");
-	assertEquals(3, listaDeUsuarios.size());
+	@DisplayName("💾 Retorna 2 usuarios")
+	public void findAllByNomeContainingIgnoreCaseRetornaDoisUsuarios() {
+		List<Usuario> listaDeUsuarios = usuarioRepository.findAllByNomeContainingIgnoreCase("Silva");
+		assertEquals(2, listaDeUsuarios.size());
 	}
 
 	@AfterAll
 	public void end() {
-	System.out.println("Teste Finalizado!");
+		System.out.println("Teste Finalizado!");
 	}
 
 }
-*/
